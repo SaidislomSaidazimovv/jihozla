@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Page Theme Lock: this site is light only. No dark variant is defined anywhere. */
+
+@theme {
+  /* Brand, sampled from the real app icon and the official wordmark */
+  --color-brand-50: #e6f7f1;
+  --color-brand-100: #c2ebdd;
+  --color-brand-200: #9adfc8;
+  --color-brand-300: #5cc9a5;
+  --color-brand-500: #00ac7a;
+  --color-brand-600: #009068;
+  --color-brand-700: #007756;
+  --color-brand-900: #063b2c;
+  --color-lime-brand: #d9f743;
+
+  /* One neutral family for the whole page, tuned to the green */
+  --color-ink-50: #f7f8f8;
+  --color-ink-100: #edefef;
+  --color-ink-200: #dde1e0;
+  --color-ink-300: #b6bfbc;
+  --color-ink-400: #8b9793;
+  --color-ink-500: #64726e;
+  --color-ink-600: #4b5854;
+  --color-ink-700: #33413d;
+  --color-ink-800: #1f2b28;
+  --color-ink-900: #131a18;
+  --color-ink-950: #0a100e;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps the sticky header from covering an anchored section */
+  scroll-padding-top: 84px;
+}
+
+body {
+  background: var(--color-ink-50);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* No overflow-x here on purpose: setting it turns body into a scroll container
+     and silently breaks position:sticky in the journey section. Sections clip
+     their own overflow instead. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The blueprint grid is the single decorative motif: it reads as CAD without
+   spelling it out. Used in the hero and the closing band, never behind body copy. */
+.blueprint {
+  background-image: linear-gradient(var(--color-ink-200) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink-200) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* The wordmark ships as a white bitmap keyed to alpha. A mask lets it take the
+   brand green and stay crisp at any size. */
+.wordmark {
+  background-color: currentColor;
+  -webkit-mask-image: url(/wordmark.png);
+  mask-image: url(/wordmark.png);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
