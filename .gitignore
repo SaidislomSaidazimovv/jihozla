@@ -20,3 +20,7 @@ tsconfig.tsbuildinfo
 .agents
 .claude
 skills-lock.json
+
+# source videos for the Telegram channel, kept locally
+*.mp4
+telegram/
