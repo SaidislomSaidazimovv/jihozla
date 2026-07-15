@@ -83,19 +83,38 @@ export function Phone({
   priority?: boolean;
 }) {
   return (
-    <div
-      className={`relative rounded-[26px] bg-ink-900 p-[5px] shadow-[0_24px_50px_-18px_rgba(6,59,44,0.3)] ${className}`}
-    >
-      <div className="overflow-hidden rounded-[21px] bg-white">
-        <Image
-          src={src}
-          alt={alt}
-          width={540}
-          height={1005}
-          priority={priority}
-          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 280px"
-          className="block h-auto w-full"
-        />
+    <div className={`relative ${className}`}>
+      {/* Titanium side buttons, on the frame edge behind the body */}
+      <span className="absolute top-[19%] -left-[2px] h-[7%] w-[3px] rounded-l bg-ink-700" aria-hidden />
+      <span className="absolute top-[30%] -left-[2px] h-[11%] w-[3px] rounded-l bg-ink-700" aria-hidden />
+      <span className="absolute top-[44%] -left-[2px] h-[11%] w-[3px] rounded-l bg-ink-700" aria-hidden />
+      <span className="absolute top-[27%] -right-[2px] h-[15%] w-[3px] rounded-r bg-ink-700" aria-hidden />
+
+      {/* Phone body: dark titanium rail with a bright inner edge and soft shadow.
+          Radii are percentage ellipses (horizontal / vertical) so the corners
+          stay phone-shaped at any size; inline style avoids Tailwind reading the
+          slash as an opacity modifier. */}
+      <div
+        className="relative bg-gradient-to-b from-ink-700 to-ink-950 p-[3.4%] shadow-[0_30px_60px_-22px_rgba(6,59,44,0.4),0_8px_18px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/40"
+        style={{ borderRadius: "13.5% / 6.6%" }}
+      >
+        {/* No notch or island: the app's own top bar sits at the screen edge
+            (the recording hid the status bar), so any overlay would clash with
+            its buttons. A clean edge-to-edge screen reads as a modern phone. */}
+        <div
+          className="overflow-hidden bg-white ring-1 ring-black/60"
+          style={{ borderRadius: "10.5% / 5.2%" }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={720}
+            height={1429}
+            priority={priority}
+            sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 300px"
+            className="block h-auto w-full"
+          />
+        </div>
       </div>
     </div>
   );
